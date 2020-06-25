@@ -1,0 +1,112 @@
+<app-navbar></app-navbar>
+<div class="container pt-100 mb-5">
+  <h1 class="mb-2">Your cart</h1>
+  <div class="row">
+    <div class="col-8">
+      <ng-container *ngIf="cart.itemCount > 0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Product</th>
+              <th>
+                Price
+              </th>
+              <th>
+                Quantity
+              </th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cart.items">
+              <td>
+                <img src="assets/img/{{ item.product.imageUrl }}" width="80" />
+              </td>
+              <td>
+                {{ item.product.name }}
+              </td>
+              <td>
+                <i class="fas fa-lira-sign">{{ item.product.price }}</i>
+              </td>
+              <td>
+                <input
+                  style="width: 60px;"
+                  type="text"
+                  class="form-control"
+                  [value]="item.quantity"
+                  (change)="
+                    cart.updateQuantity(item.product, $event.target.value)
+                  "
+                />
+              </td>
+              <td>
+                <i class="fas fa-lira-sign">{{
+                  item.quantity * item.product.price
+                }}</i>
+              </td>
+              <td>
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="cart.removeItem(item.product.id)"
+                >
+                  <i class="fa fa-times fa-fw"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-container *ngIf="cart.itemCount == 0">
+        <div class="alert alert-warning">
+          Cart is empty
+          <button
+            [routerLink]="['/shop']"
+            routerLinkActive="router-link-active"
+            class="btn btn-link p-0"
+          >
+            Continue shopping
+          </button>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-4">
+      <ng-container *ngIf="cart.itemCount > 0">
+        <div class="text-left">
+          <h4>
+            Shopping summary
+          </h4>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>
+                Total
+              </th>
+              <td>
+                <i class="fas fa-lira-sign">{{ cart.total }}</i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button
+            [routerLink]="['/shop']"
+            routerLinkActive="router-link-active"
+            class="btn btn-primary btn-sm"
+          >
+            Continue shopping
+          </button>
+          <button
+            [routerLink]="['/checkout']"
+            routerLinkActive="router-link-active"
+            class="btn btn-primary btn-sm ml-2"
+          >
+            Complete shopping
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

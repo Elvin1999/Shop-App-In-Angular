@@ -1,0 +1,29 @@
+import { AdminModule } from './admin/admin.module';
+import { CheckoutComponent } from './shop/checkout/checkout.component';
+import { CartDetailComponent } from './shop/cart-detail/cart-detail.component';
+import { ShopModule } from './shop/shop.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { ShopComponent } from './shop/shop/shop.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    ShopModule,
+    RouterModule.forRoot([
+      { path: 'shop', component: ShopComponent },
+      { path: 'cart', component: CartDetailComponent },
+      { path: 'checkout', component: CheckoutComponent },
+      { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
+      { path: '**', redirectTo: '/shop' },
+    ]),
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+  constructor() {}
+}

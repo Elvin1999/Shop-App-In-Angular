@@ -1,0 +1,37 @@
+<table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of getCategories()">
+       
+        <td>
+          {{ c.name }}
+        </td>
+        
+        <td>
+          <button
+            [routerLink]="['/admin/main/categories/edit', c.id]"
+            routerLinkActive="router-link-active"
+            class="btn btn-warning btn-sm"
+          >
+            Edit
+          </button>
+          <button (click)="deleteCategory(c)" class="btn btn-danger btn-sm ml-2">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button
+    [routerLink]="['/admin/main/categories/create']"
+    routerLinkActive="router-link-active"
+    class="btn btn-primary mb-2"
+  >
+    Add Category
+  </button>
+  

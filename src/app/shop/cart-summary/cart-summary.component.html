@@ -1,0 +1,13 @@
+<div class="alert alert-success">
+  <span *ngIf="cart.itemCount > 0">
+    You have {{ cart.itemCount }} products in your cart.
+    <br />
+    Total price : <i class="fas fa-lira-sign">{{ cart.total }}</i>
+    <button (click)="goCart()" class="btn btn-outline-warning text-dark btn-sm ml-2">
+      Go Cart
+    </button>
+  </span>
+  <span *ngIf="cart.itemCount == 0">
+    You do not have any product in your cart
+  </span>
+</div>
